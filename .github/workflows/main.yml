@@ -33,7 +33,7 @@ jobs:
     - id: 'deploy'
       uses: 'google-github-actions/deploy-appengine@v0'
       with:
-        project-id: 'topdriver-notifier'
+        project_id: 'topdriver-notifier'
         deliverables: 'app.yaml'
         working_directory: '/'
       
