@@ -1,4 +1,4 @@
-runtime: go117
+runtime: go116
 env_variables:
   COOKIE: $COOKIE
   TWILIO_ACCOUNT_SID: $TWILIO_ACCOUNT_SID

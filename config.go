@@ -1,11 +1,5 @@
 package main
 
-import (
-	"io/ioutil"
-
-	"gopkg.in/yaml.v2"
-)
-
 type Config struct {
 	InstructorId        string `yaml:"instructor_id"`
 	Timings             string `yaml:"timings"`
@@ -33,6 +27,6 @@ func GetConfig(path string) (*Config, error) {
 		PickupLocation: "Home",
 		DropoffLocation: "Home",
 		ReceiverPhoneNumber: "+13123994384",
-		PhoneNumber: "+18484209423"
+		PhoneNumber: "+18484209423",
 	}, nil
 }
