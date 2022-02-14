@@ -37,7 +37,6 @@ jobs:
       with:
         project_id: 'topdriver-notifier'
         deliverables: 'app.yaml'
-        working_directory: '/'
       
       
       
