@@ -27,7 +27,7 @@ jobs:
       uses: 'actions/checkout@v2'
     - uses: golang-enthusiast/app-yaml-env-compiler@v1.0
       env:
-        COOKIKE: ${{ secrets.MY_ENV_VAR1 }}
+        COOKIE: ${{ secrets.COOKIE }}
         TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
         TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
     - id: 'auth'
