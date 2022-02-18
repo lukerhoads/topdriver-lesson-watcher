@@ -13,10 +13,7 @@ import (
 const retryDelayMinutes = 3
 
 func main() {
-	err := godotenv.Load(".env")
-	if err != nil {
-		log.Fatal(err)
-	}
+	_ = godotenv.Load(".env")
 
 	cookie := os.Getenv("COOKIE")
 	if cookie == "" {
