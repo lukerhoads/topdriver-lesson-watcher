@@ -5,7 +5,6 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
-	"time"
 
 	"github.com/joho/godotenv"
 )
@@ -48,29 +47,34 @@ func main() {
 		os.Exit(0)
 	}()
 
-	topDriverClient := NewTopdriverClient(cookie, cfg.InstructorId, cfg.Timings, cfg.PickupLocation, cfg.DropoffLocation)
+	_ = NewTopdriverClient(cookie, cfg.InstructorId, cfg.Timings, cfg.PickupLocation, cfg.DropoffLocation)
 	notifier := NewNotifier(accountSid, authToken, cfg.PhoneNumber)
 
-	for {
-		log.Println("Fetching available classes...")
-
-		rawClasses, err := topDriverClient.GetAvailableDays()
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		// Decode rawClasses
-		appointmentAvailable, err := ParseRes(rawClasses)
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		log.Println(appointmentAvailable)
-		if appointmentAvailable {
-			log.Println("Detected an available appointment, sending text...")
-			notifier.SendText(cfg.ReceiverPhoneNumber, "Detected an available lesson")
-		}
-
-		time.Sleep(time.Duration(retryDelayMinutes) * time.Minute)
+	err = notifier.SendText("+13123994384", "hello")
+	if err != nil {
+		log.Fatal(err)
 	}
+
+	// for {
+	// 	log.Println("Fetching available classes...")
+
+	// 	rawClasses, err := topDriverClient.GetAvailableDays()
+	// 	if err != nil {
+	// 		log.Fatal(err)
+	// 	}
+
+	// 	// Decode rawClasses
+	// 	appointmentAvailable, err := ParseRes(rawClasses)
+	// 	if err != nil {
+	// 		log.Fatal(err)
+	// 	}
+
+	// 	log.Println(appointmentAvailable)
+	// 	if appointmentAvailable {
+	// 		log.Println("Detected an available appointment, sending text...")
+	// 		notifier.SendText(cfg.ReceiverPhoneNumber, "Detected an available lesson")
+	// 	}
+
+	// 	time.Sleep(time.Duration(retryDelayMinutes) * time.Minute)
+	// }
 }
