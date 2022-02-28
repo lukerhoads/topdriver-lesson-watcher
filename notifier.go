@@ -30,6 +30,7 @@ func NewNotifier(accountSid, authToken, phoneNumber string) *Notifier {
 
 func (n *Notifier) SendText(to, message string) error {
 	params := &openapi.CreateMessageParams{}
+	log.Println(to)
 	params.SetTo(to)
 	params.SetFrom(n.phoneNumber)
 	params.SetBody(message)
