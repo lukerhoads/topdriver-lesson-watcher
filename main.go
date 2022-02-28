@@ -13,10 +13,7 @@ import (
 const retryDelayMinutes = 3
 
 func main() {
-	err := godotenv.Load(".env")
-	if err != nil {
-		log.Fatal(err)
-	}
+	_ = godotenv.Load(".env")
 
 	cookie := os.Getenv("COOKIE")
 	if cookie == "" {
@@ -68,6 +65,7 @@ func main() {
 			log.Fatal(err)
 		}
 
+		log.Println(appointmentAvailable)
 		if appointmentAvailable {
 			log.Println("Detected an available appointment, sending text...")
 			notifier.SendText(cfg.ReceiverPhoneNumber, "Detected an available lesson")

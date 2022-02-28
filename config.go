@@ -1,11 +1,5 @@
 package main
 
-import (
-	"io/ioutil"
-
-	"gopkg.in/yaml.v2"
-)
-
 type Config struct {
 	InstructorId        string `yaml:"instructor_id"`
 	Timings             string `yaml:"timings"`
@@ -16,16 +10,23 @@ type Config struct {
 }
 
 func GetConfig(path string) (*Config, error) {
-	yamlFile, err := ioutil.ReadFile(path)
-	if err != nil {
-		return nil, err
-	}
+	// yamlFile, err := ioutil.ReadFile(path)
+	// if err != nil {
+	// 	return nil, err
+	// }
 
-	config := &Config{}
-	err = yaml.Unmarshal(yamlFile, config)
-	if err != nil {
-		return nil, err
-	}
+	// config := &Config{}
+	// err = yaml.Unmarshal(yamlFile, config)
+	// if err != nil {
+	// 	return nil, err
+	// }
 
-	return config, nil
+	return &Config{
+		InstructorId: "-1",
+		Timings: "-1",
+		PickupLocation: "Home",
+		DropoffLocation: "Home",
+		ReceiverPhoneNumber: "+13123994384",
+		PhoneNumber: "+18484209423",
+	}, nil
 }

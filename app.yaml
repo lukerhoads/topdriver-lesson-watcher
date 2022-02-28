@@ -1,3 +1,5 @@
-runtime: go117
-includes:
-  - env.yaml
+runtime: go116
+env_variables:
+  COOKIE: $COOKIE
+  TWILIO_ACCOUNT_SID: $TWILIO_ACCOUNT_SID
+  TWILIO_AUTH_TOKEN: $TWILIO_AUTH_TOKEN

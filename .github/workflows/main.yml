@@ -1,0 +1,52 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  deploy:
+    runs-on: 'ubuntu-latest'
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+    - name: 'Checkout'
+      uses: 'actions/checkout@v2'
+    - uses: golang-enthusiast/app-yaml-env-compiler@v1.0
+      env:
+        COOKIE: ${{ secrets.COOKIE }}
+        TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+        TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+#     - id: 'auth'
+#       name: 'Authenticate to Google Cloud'
+#       uses: 'google-github-actions/auth@v0'
+#       with:
+#         workload_identity_provider: 'projects/19324948760/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
+#         service_account: 'github-actions-ci@topdriver-notifier.iam.gserviceaccount.com'
+    - id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v0'
+      with:
+        credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+
+    - id: 'deploy'
+      uses: 'google-github-actions/deploy-appengine@v0'
+      with:
+        project_id: 'topdriver-notifier'
+        deliverables: 'app.yaml'
+      
+      
+      
